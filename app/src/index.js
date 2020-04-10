@@ -37,8 +37,15 @@ const App = {
     const id = document.getElementById("starId").value;
     await createStar(name, id).send({from: this.account});
     App.setStatus("New Star Owner is " + this.account + ".");
-  }
+  },
 
+  lookUpAStar: async function name(params) {
+    const { lookUptokenIdToStarInfo } = this.meta.methods; // to be able to use the functions in your Smart Contract use destructuring to get the function to be call
+    let tokenId = document.getElementById('lookUpAStarInput').value;
+    let starName = await lookUptokenIdToStarInfo(tokenId).call();
+    let status = document.getElementById("lookUpAStar");
+    status.innerHTML = `Star name is ${starName}`;
+  }
 };
 
 window.App = App;
